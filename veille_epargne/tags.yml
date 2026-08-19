@@ -1,0 +1,225 @@
+# =============================================================================
+# Règles de tags — détection par mots-clés (titre + résumé)
+# -----------------------------------------------------------------------------
+# Chaque tag est appliqué à un article si l'un de ses mots-clés apparaît
+# (recherche insensible à la casse et aux accents). Un article peut cumuler
+# plusieurs tags. Ajoutez / retirez des tags et mots-clés librement.
+#
+# Les mots-clés de "indices_domaine" servent à re-classer les articles des
+# sources "transverse" en "assurance" ou "banque".
+# =============================================================================
+
+tags:
+
+  Fiscalité:
+    couleur: "#b45309"       # ambre
+    mots_cles:
+      - fiscalité
+      - fiscal
+      - impôt
+      - impot
+      - imposition
+      - pfu
+      - flat tax
+      - prélèvement forfaitaire
+      - abattement
+      - niche fiscale
+      - défiscalisation
+      - defiscalisation
+      - exonération
+      - plus-value
+      - prélèvements sociaux
+      - loi de finances
+      - crédit d'impôt
+      - réduction d'impôt
+
+  Réglementation:
+    couleur: "#6d28d9"       # violet
+    mots_cles:
+      - réglementation
+      - reglementation
+      - réglementaire
+      - régulateur
+      - loi
+      - décret
+      - directive
+      - ordonnance
+      - amf
+      - acpr
+      - conformité
+      - solvabilité
+      - solvabilite
+      - dda
+      - priips
+      - mif
+      - mifid
+      - mica
+      - bruxelles
+      - sanction
+      - contrôle
+      - lcb-ft
+      - blanchiment
+
+  Nouveau produit:
+    couleur: "#047857"       # vert
+    mots_cles:
+      - nouveau produit
+      - nouvelle offre
+      - lancement
+      - lance
+      - lancent
+      - dévoile
+      - devoile
+      - innovation
+      - nouveau contrat
+      - nouveau fonds
+      - nouvelle gamme
+      - commercialise
+
+  Rendement / Taux:
+    couleur: "#1d4ed8"       # bleu
+    mots_cles:
+      - rendement
+      - rendements
+      - taux
+      - rémunération
+      - remuneration
+      - performance
+      - revalorisation
+      - taux d'intérêt
+      - taux garanti
+      - bonus
+
+  Assurance-vie:
+    couleur: "#0f766e"       # sarcelle
+    mots_cles:
+      - assurance-vie
+      - assurance vie
+      - fonds euros
+      - fonds en euros
+      - unités de compte
+      - unite de compte
+      - contrat multisupport
+      - eurocroissance
+
+  Épargne retraite / PER:
+    couleur: "#7c2d12"       # brun
+    mots_cles:
+      - per
+      - plan d'épargne retraite
+      - épargne retraite
+      - epargne retraite
+      - retraite
+      - perp
+      - perco
+      - madelin
+
+  Livrets réglementés:
+    couleur: "#be123c"       # rose foncé
+    mots_cles:
+      - livret a
+      - ldds
+      - lep
+      - livret d'épargne populaire
+      - livret jeune
+      - cel
+      - pel
+      - plan épargne logement
+      - épargne réglementée
+
+  Bourse / PEA:
+    couleur: "#4338ca"       # indigo
+    mots_cles:
+      - pea
+      - peac
+      - bourse
+      - action
+      - actions
+      - etf
+      - opcvm
+      - sicav
+      - fcp
+      - obligations
+
+  Immobilier / SCPI:
+    couleur: "#9a3412"       # orange foncé
+    mots_cles:
+      - scpi
+      - opci
+      - pierre-papier
+      - pierre papier
+      - immobilier
+      - sci
+      - immobilier locatif
+
+  ESG / Durable:
+    couleur: "#15803d"       # vert foncé
+    mots_cles:
+      - isr
+      - esg
+      - durable
+      - responsable
+      - climat
+      - vert
+      - transition énergétique
+      - label greenfin
+      - finance durable
+
+  Crypto / Actifs numériques:
+    couleur: "#a16207"       # or
+    mots_cles:
+      - crypto
+      - cryptomonnaie
+      - bitcoin
+      - actif numérique
+      - actifs numériques
+      - psan
+      - mica
+      - stablecoin
+
+  Marché / Collecte:
+    couleur: "#334155"       # ardoise
+    mots_cles:
+      - collecte
+      - décollecte
+      - decollecte
+      - encours
+      - distribution
+      - courtier
+      - courtage
+      - parts de marché
+      - chiffre d'affaires
+      - résultats annuels
+
+# Indices pour re-classer un article "transverse" en assurance ou banque.
+indices_domaine:
+  assurance:
+    - assurance-vie
+    - assurance vie
+    - assureur
+    - assureurs
+    - fonds euros
+    - fonds en euros
+    - unités de compte
+    - unite de compte
+    - per
+    - épargne retraite
+    - eurocroissance
+    - mutuelle
+    - contrat de capitalisation
+  banque:
+    - banque
+    - banques
+    - bancaire
+    - livret a
+    - ldds
+    - lep
+    - pel
+    - cel
+    - pea
+    - compte à terme
+    - compte epargne
+    - compte épargne
+    - dépôt
+    - depot
+    - crédit

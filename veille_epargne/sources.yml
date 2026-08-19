@@ -1,0 +1,177 @@
+# =============================================================================
+# Sources de veille — Épargne / Assurance / Banque en France
+# -----------------------------------------------------------------------------
+# Chaque source expose un ou plusieurs flux RSS/Atom.
+#
+#   domaine : "assurance" | "banque" | "transverse"
+#             -> les sources "transverse" (régulateurs, presse patrimoniale,
+#                administration) sont re-classées article par article selon
+#                les mots-clés du titre/résumé.
+#   actif   : true/false pour activer/désactiver une source sans la supprimer.
+#   flux    : URL du flux RSS/Atom.
+#
+# NB : les URLs de flux évoluent parfois. L'application ignore proprement un
+# flux injoignable (avertissement en log). Vérifiez/ajustez les URLs via les
+# pages "flux RSS" de chaque éditeur (voir README, section "Vérifier les flux").
+# =============================================================================
+
+# Mots-clés déterminant qu'un article concerne bien l'épargne / le placement.
+# Un article est retenu s'il contient AU MOINS un de ces termes
+# (dans le titre ou le résumé). Laisser vide pour tout conserver.
+pertinence:
+  - épargne
+  - epargne
+  - placement
+  - placements
+  - assurance-vie
+  - assurance vie
+  - fonds euros
+  - fonds en euros
+  - unités de compte
+  - unite de compte
+  - per
+  - plan d'épargne retraite
+  - épargne retraite
+  - retraite
+  - livret a
+  - ldds
+  - lep
+  - livret
+  - pea
+  - peac
+  - scpi
+  - opci
+  - pierre-papier
+  - obligations
+  - bon de capitalisation
+  - contrat de capitalisation
+  - taux
+  - rendement
+  - rémunération
+  - fiscalité
+  - fiscalite
+  - défiscalisation
+  - patrimoine
+  - collecte
+  - encours
+  - flat tax
+  - pfu
+  - prélèvement forfaitaire
+  - crypto
+  - cryptomonnaie
+  - actif numérique
+  - actifs numériques
+  - bitcoin
+  - sofica
+  - lingot
+  - métaux précieux
+
+sources:
+
+  # ---------------------------------------------------------------------------
+  # ASSURANCE — presse et acteurs du secteur assurance / épargne assurantielle
+  # ---------------------------------------------------------------------------
+  - nom: "L'Argus de l'Assurance"
+    domaine: assurance
+    site: "https://www.argusdelassurance.com/"
+    actif: true
+    flux:
+      - "https://www.argusdelassurance.com/rss"
+
+  - nom: "News Assurances Pro"
+    domaine: assurance
+    site: "https://www.newsassurancespro.com/"
+    actif: true
+    flux:
+      - "https://www.newsassurancespro.com/feed"
+
+  - nom: "Good Value for Money"
+    domaine: assurance
+    site: "https://www.goodvalueformoney.eu/"
+    actif: true
+    flux:
+      - "https://www.goodvalueformoney.eu/feed"
+
+  - nom: "France Assureurs"
+    domaine: assurance
+    site: "https://www.franceassureurs.fr/"
+    actif: true
+    flux:
+      - "https://www.franceassureurs.fr/feed/"
+
+  # ---------------------------------------------------------------------------
+  # BANQUE — presse et acteurs banque / épargne réglementée & bancaire
+  # ---------------------------------------------------------------------------
+  - nom: "MoneyVox"
+    domaine: banque
+    site: "https://www.moneyvox.fr/"
+    actif: true
+    flux:
+      - "https://www.moneyvox.fr/rss/actualites.xml"
+
+  - nom: "cBanque"
+    domaine: banque
+    site: "https://www.cbanque.com/"
+    actif: true
+    flux:
+      - "https://www.cbanque.com/rss/actualites.rss"
+
+  - nom: "France Transactions"
+    domaine: banque
+    site: "https://www.francetransactions.com/"
+    actif: true
+    flux:
+      - "https://www.francetransactions.com/spip.php?page=backend"
+
+  # ---------------------------------------------------------------------------
+  # TRANSVERSE — régulateurs, administration, presse patrimoniale généraliste.
+  # Re-classés article par article (assurance / banque) selon les mots-clés.
+  # ---------------------------------------------------------------------------
+  - nom: "AMF — Épargnants"
+    domaine: transverse
+    site: "https://www.amf-france.org/fr/espace-epargnants"
+    actif: true
+    flux:
+      - "https://www.amf-france.org/fr/flux-rss/display/22"
+
+  - nom: "AMF — Actualités"
+    domaine: transverse
+    site: "https://www.amf-france.org/fr/actualites-publications"
+    actif: true
+    flux:
+      - "https://www.amf-france.org/fr/flux-rss/display/30"
+
+  - nom: "AMF — Communiqués de presse"
+    domaine: transverse
+    site: "https://www.amf-france.org/fr/actualites-publications/communiques"
+    actif: true
+    flux:
+      - "https://www.amf-france.org/fr/flux-rss/display/23"
+
+  - nom: "Ministère de l'Économie et des Finances"
+    domaine: transverse
+    site: "https://www.economie.gouv.fr/"
+    actif: true
+    flux:
+      - "https://www.economie.gouv.fr/rss"
+
+  - nom: "Mieux Vivre Votre Argent"
+    domaine: transverse
+    site: "https://www.mieuxvivre-votreargent.fr/"
+    actif: true
+    flux:
+      - "https://www.mieuxvivre-votreargent.fr/feed/"
+
+  - nom: "Le Revenu"
+    domaine: transverse
+    site: "https://www.lerevenu.com/"
+    actif: true
+    flux:
+      - "https://www.lerevenu.com/rss.xml"
+
+  - nom: "Capital — Placements"
+    domaine: transverse
+    site: "https://www.capital.fr/votre-argent"
+    actif: true
+    flux:
+      - "https://www.capital.fr/rss"
