@@ -1,0 +1,385 @@
+/* =====================================================================
+ * styles.css — Agent d'apprentissage du japonais
+ * Palette inspirée du drapeau japonais (rouge/blanc) + tons doux.
+ * ===================================================================== */
+
+:root {
+  --bg: #f6f4ef;
+  --surface: #ffffff;
+  --surface-2: #f1eee7;
+  --text: #1e1b18;
+  --text-soft: #5c554d;
+  --border: #e2ddd3;
+  --accent: #d0392b;        /* rouge « hinomaru » */
+  --accent-soft: #f7dcd8;
+  --accent-1: #d0392b;
+  --accent-2: #2b6cb0;
+  --accent-3: #b7791f;
+  --good: #2f855a;
+  --good-soft: #d5efe0;
+  --bad: #c53030;
+  --bad-soft: #fadbd8;
+  --shadow: 0 6px 20px rgba(30, 27, 24, 0.08);
+  --radius: 16px;
+  --font: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui,
+    -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17150f;
+    --surface: #221f18;
+    --surface-2: #2b271e;
+    --text: #f2ede3;
+    --text-soft: #b7ae9f;
+    --border: #38332a;
+    --accent: #f06559;
+    --accent-soft: #43221f;
+    --accent-2: #63b3ed;
+    --accent-3: #ecc94b;
+    --good: #68d391;
+    --good-soft: #22392c;
+    --bad: #fc8181;
+    --bad-soft: #3a2020;
+    --shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17150f;
+  --surface: #221f18;
+  --surface-2: #2b271e;
+  --text: #f2ede3;
+  --text-soft: #b7ae9f;
+  --border: #38332a;
+  --accent: #f06559;
+  --accent-soft: #43221f;
+  --accent-2: #63b3ed;
+  --accent-3: #ecc94b;
+  --good: #68d391;
+  --good-soft: #22392c;
+  --bad: #fc8181;
+  --bad-soft: #3a2020;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- En-tête ---------- */
+header {
+  background: linear-gradient(135deg, var(--accent), #a52a1f);
+  color: #fff;
+  padding: 28px 16px 22px;
+  text-align: center;
+  position: relative;
+}
+header .hinomaru {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+header h1 {
+  margin: 6px 0 2px;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  letter-spacing: 0.5px;
+}
+header p {
+  margin: 0;
+  opacity: 0.92;
+  font-size: 0.95rem;
+}
+.theme-toggle {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.theme-toggle:hover { background: rgba(255, 255, 255, 0.3); }
+
+/* ---------- Navigation par onglets ---------- */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+nav button {
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-soft);
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+nav button:hover { color: var(--text); border-color: var(--accent); }
+nav button.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ---------- Conteneur principal ---------- */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+.section { display: none; }
+.section.active { display: block; animation: fade 0.25s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.section-intro {
+  text-align: center;
+  margin-bottom: 22px;
+}
+.section-intro h2 { margin: 0 0 4px; font-size: 1.5rem; }
+.section-intro p { margin: 0; color: var(--text-soft); }
+
+/* ---------- Sélecteur de thème de vocabulaire ---------- */
+.theme-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+.theme-chips button {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.theme-chips button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+
+/* ---------- Grille de cartes de vocabulaire ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 12px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease;
+}
+.card:hover { transform: translateY(-3px); }
+.card .img { font-size: 2.6rem; line-height: 1; }
+.card .jp { font-size: 1.5rem; font-weight: 700; margin-top: 8px; }
+.card .romaji { color: var(--accent); font-style: italic; font-size: 0.95rem; }
+.card .kana { color: var(--text-soft); font-size: 0.85rem; }
+.card .fr { margin-top: 4px; font-weight: 600; }
+.card .speak {
+  margin-top: 10px;
+  border: none;
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+.card .speak:hover { background: var(--accent-soft); color: var(--accent); }
+
+/* ---------- Verbes ---------- */
+.verb-filters { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+.verb-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  margin-bottom: 16px;
+}
+.verb-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.verb-head .img { font-size: 2rem; }
+.verb-head .fr { font-size: 1.25rem; font-weight: 700; }
+.verb-head .badge {
+  font-size: 0.72rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-soft);
+  border: 1px solid var(--border);
+  margin-left: auto;
+}
+.conj-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.95rem; }
+.conj-table th, .conj-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.conj-table th { color: var(--text-soft); font-weight: 600; width: 30%; }
+.conj-table .jp { font-size: 1.15rem; font-weight: 600; }
+.conj-table .romaji { color: var(--accent); font-style: italic; font-size: 0.85rem; }
+.verb-example {
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: var(--surface-2);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+}
+.verb-example .jp { font-size: 1.1rem; }
+.verb-example .romaji { color: var(--accent); font-style: italic; font-size: 0.88rem; }
+.verb-example .fr { color: var(--text-soft); font-size: 0.9rem; }
+
+/* ---------- Grammaire ---------- */
+.lesson {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.lesson summary {
+  cursor: pointer;
+  padding: 16px 18px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.lesson summary::-webkit-details-marker { display: none; }
+.lesson summary .icon { font-size: 1.4rem; }
+.lesson summary .chev { margin-left: auto; transition: transform 0.2s; color: var(--text-soft); }
+.lesson[open] summary .chev { transform: rotate(90deg); }
+.lesson .resume { color: var(--text-soft); font-weight: 400; font-size: 0.88rem; display: block; }
+.lesson-body { padding: 0 18px 18px; }
+.lesson-body p { margin: 8px 0; }
+.lesson-body .ex {
+  margin-top: 10px;
+  padding: 12px 14px;
+  background: var(--surface-2);
+  border-radius: 8px;
+}
+.lesson-body .ex .jp { font-size: 1.15rem; font-weight: 600; }
+.lesson-body .ex .romaji { color: var(--accent); font-style: italic; font-size: 0.88rem; }
+.lesson-body .ex .fr { color: var(--text-soft); font-size: 0.92rem; }
+
+/* ---------- Entraînement (quiz + flashcards) ---------- */
+.practice-switch { display: flex; gap: 8px; justify-content: center; margin-bottom: 22px; }
+
+/* Flashcard */
+.flashcard-wrap { max-width: 340px; margin: 0 auto; text-align: center; }
+.flashcard {
+  perspective: 1000px;
+  height: 240px;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px;
+}
+.flashcard-face.back { transform: rotateY(180deg); }
+.flashcard-face .img { font-size: 3.4rem; }
+.flashcard-face .jp { font-size: 2rem; font-weight: 700; }
+.flashcard-face .romaji { color: var(--accent); font-style: italic; }
+.flashcard-face .fr { font-size: 1.5rem; font-weight: 700; }
+.flashcard-face .hint { color: var(--text-soft); font-size: 0.82rem; }
+
+/* Quiz */
+.quiz-box { max-width: 480px; margin: 0 auto; text-align: center; }
+.quiz-progress { color: var(--text-soft); font-size: 0.9rem; margin-bottom: 12px; }
+.quiz-prompt {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 26px 16px;
+  margin-bottom: 18px;
+}
+.quiz-prompt .img { font-size: 3rem; }
+.quiz-prompt .jp { font-size: 2rem; font-weight: 700; margin-top: 6px; }
+.quiz-prompt .romaji { color: var(--accent); font-style: italic; }
+.quiz-options { display: grid; gap: 10px; }
+.quiz-options button {
+  padding: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.15s;
+}
+.quiz-options button:hover:not(:disabled) { border-color: var(--accent); }
+.quiz-options button.correct { background: var(--good-soft); border-color: var(--good); color: var(--good); font-weight: 700; }
+.quiz-options button.wrong { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); }
+.quiz-options button:disabled { cursor: default; }
+.quiz-score { font-size: 1.1rem; font-weight: 700; margin-top: 8px; }
+
+/* Boutons génériques */
+.btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 9px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn.primary:hover { filter: brightness(1.05); }
+.btn.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+footer {
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  padding: 20px 16px 40px;
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  .conj-table th { width: 40%; }
+}
