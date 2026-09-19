@@ -9,7 +9,7 @@ pour un apprentissage plus visuel.
 
 | Module | Contenu |
 | --- | --- |
-| 🈯 **Vocabulaire** | Plus de 70 mots classés par thèmes (salutations, nombres, couleurs, animaux, nourriture, famille, corps, nature). Chaque mot : image + kanji/kana + kana de lecture + rōmaji + français. |
+| 🈯 **Vocabulaire** | Plus de 200 mots classés en 21 thèmes d'apprentissage (salutations, nombres, temps & jours, famille, corps, couleurs, alimentation, restauration, achats & argent, transport, voyages, en ville & lieux, maison, vêtements, école & études, métiers & travail, animaux, nature & météo, directions & positions, adjectifs courants, expressions utiles). Chaque mot : image + kanji/kana + kana de lecture + rōmaji + français. |
 | 🔀 **Verbes** | Conjugaison des verbes essentiels à la forme polie (dictionnaire, présent ~ます, négatif ~ません, passé ~ました, forme en て), classés par groupe (godan, ichidan, irréguliers), avec une phrase d'exemple. |
 | 📚 **Grammaire** | Leçons courtes et progressives : ordre des mots (SOV), particules は・を・に・で・の, la copule です, les questions avec か, les adjectifs -い / -な. |
 | 🎯 **Entraînement** | Cartes-mémoire (flashcards) recto/verso et quiz à choix multiples pour s'auto-évaluer. |
