@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  const { VOCABULAIRE, VERBES, GROUPES_VERBES, GRAMMAIRE } = window.DATA;
+  const { VOCABULAIRE, VERBES, GROUPES_VERBES, GRAMMAIRE, QUESTIONS } = window.DATA;
 
   /* ---------- Utilitaires ---------- */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -252,6 +252,48 @@
   }
 
   /* ================================================================
+   * QUESTIONS — mots interrogatifs et modèles de questions
+   * ================================================================ */
+  function initQuestions() {
+    const container = $("#questions-list");
+    if (!container || !QUESTIONS) return;
+
+    QUESTIONS.forEach((cat) => {
+      const sec = el("section", "q-group");
+      sec.appendChild(
+        (() => {
+          const head = el("div", "level-head");
+          head.innerHTML = `
+            <h3>${cat.icon} ${escapeHtml(cat.categorie)}</h3>
+            <p>${escapeHtml(cat.desc)} · ${cat.items.length} tournures</p>`;
+          return head;
+        })()
+      );
+      const grid = el("div", "q-grid");
+      cat.items.forEach((it) => {
+        const card = el("div", "q-card");
+        card.innerHTML = `
+          <div class="q-word">
+            <span class="jp">${escapeHtml(it.jp)}</span>
+            ${speakBtn(it.jp)}
+          </div>
+          <div class="kana">${escapeHtml(it.kana)}</div>
+          <div class="romaji">${escapeHtml(it.romaji)}</div>
+          <div class="fr">${escapeHtml(it.fr)}</div>
+          <div class="q-ex">
+            <div class="jp">${escapeHtml(it.exemple.jp)}</div>
+            <div class="romaji">${escapeHtml(it.exemple.romaji)}</div>
+            <div class="fr">${escapeHtml(it.exemple.fr)}</div>
+            ${speakBtn(it.exemple.jp)}
+          </div>`;
+        grid.appendChild(card);
+      });
+      sec.appendChild(grid);
+      container.appendChild(sec);
+    });
+  }
+
+  /* ================================================================
    * ENTRAÎNEMENT — jeu de données commun
    * ================================================================ */
   // On rassemble tout le vocabulaire pour les exercices.
@@ -456,6 +498,7 @@
     initVocabulaire();
     initVerbes();
     initGrammaire();
+    initQuestions();
     initPractice();
     initSpeechDelegation();
   });

@@ -485,4 +485,5 @@ window.DATA = {
   VERBES: (typeof VERBES !== "undefined" ? VERBES : window.VERBES),
   GROUPES_VERBES,
   GRAMMAIRE,
+  QUESTIONS: (typeof QUESTIONS !== "undefined" ? QUESTIONS : window.QUESTIONS),
 };
