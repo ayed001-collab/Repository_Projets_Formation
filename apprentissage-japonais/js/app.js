@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  const { VOCABULAIRE, VERBES, GROUPES_VERBES, GRAMMAIRE, QUESTIONS, KANJI, ADJECTIFS, COULEURS, KANA } = window.DATA;
+  const { VOCABULAIRE, VERBES, GROUPES_VERBES, GRAMMAIRE, QUESTIONS, KANJI, ADJECTIFS, COULEURS, KANA, VIDEOS } = window.DATA;
 
   /* ---------- Utilitaires ---------- */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -497,6 +497,40 @@
   }
 
   /* ================================================================
+   * VIDÉOS — par thème (intégration YouTube ou lien de recherche)
+   * ================================================================ */
+  function initVideos() {
+    const container = $("#videos-list");
+    if (!container || !VIDEOS) return;
+
+    const grid = el("div", "video-grid");
+    VIDEOS.forEach((v) => {
+      const card = el("div", "video-card");
+      let media;
+      if (v.videoId) {
+        // Intégration directe (lecteur YouTube, version sans cookies)
+        media = `<div class="video-embed">
+            <iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(v.videoId)}"
+              title="${escapeHtml(v.theme)}" loading="lazy" allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>`;
+      } else {
+        const url = "https://www.youtube.com/results?search_query=" + encodeURIComponent(v.query);
+        media = `<a class="btn primary video-link" href="${url}" target="_blank" rel="noopener noreferrer">▶ Voir des vidéos sur YouTube</a>`;
+      }
+      card.innerHTML = `
+        <div class="video-head">
+          <span class="icon">${v.icon}</span>
+          <span class="video-title">${escapeHtml(v.theme)}</span>
+        </div>
+        <p class="video-desc">${escapeHtml(v.desc)}</p>
+        ${media}`;
+      grid.appendChild(card);
+    });
+    container.appendChild(grid);
+  }
+
+  /* ================================================================
    * ENTRAÎNEMENT — jeu de données commun
    * ================================================================ */
   // On rassemble tout le vocabulaire pour les exercices.
@@ -706,6 +740,7 @@
     initKanji();
     initAdjectifs();
     initCouleurs();
+    initVideos();
     initPractice();
     initSpeechDelegation();
   });

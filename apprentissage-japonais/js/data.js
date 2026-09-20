@@ -490,4 +490,5 @@ window.DATA = {
   ADJECTIFS: (typeof ADJECTIFS !== "undefined" ? ADJECTIFS : window.ADJECTIFS),
   COULEURS: (typeof COULEURS !== "undefined" ? COULEURS : window.COULEURS),
   KANA: (typeof KANA !== "undefined" ? KANA : window.KANA),
+  VIDEOS: (typeof VIDEOS !== "undefined" ? VIDEOS : window.VIDEOS),
 };

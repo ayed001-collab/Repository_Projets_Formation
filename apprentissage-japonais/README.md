@@ -17,6 +17,7 @@ pour un apprentissage plus visuel.
 | ⇄ **Adjectifs** | **72 adjectifs en 36 paires d'opposés** (contraire en face de chaque adjectif), groupés en 10 thèmes (taille, poids & prix, temps & vitesse, température, goût, apparence, caractère, émotions, bien/mal, texture). Type い / な indiqué, avec un exemple d'utilisation (japonais, rōmaji, français) et audio. |
 | 漢 **Kanji** | **127 kanji parmi les plus récurrents**, regroupés en 10 thèmes (nombres, jours & temps, nature, personnes & famille, corps, positions, adjectifs & couleurs, verbes, lieux & société, autres). Chaque kanji montre ses lectures **on'yomi** (音) et **kun'yomi** (訓), son sens en français et **toujours un exemple d'utilisation** (japonais, rōmaji, français) avec audio. Recherche intégrée (sens, lecture ou caractère). |
 | ❓ **Questions** | Axe dédié à la formulation des questions : les mots interrogatifs (何・誰・どこ・いつ・なぜ・いくら…), les questions avec です か, les questions avec un verbe (何を・どこへ・誰と・どうやって…) et des tournures utiles pour se dépanner. Chaque tournure a un exemple complet (japonais, rōmaji, français) et l'audio. |
+| 🎬 **Vidéos** | Une carte par thème d'apprentissage (14 thèmes). Chaque carte ouvre une recherche YouTube ciblée (contenu externe) ; une vidéo précise peut être **intégrée directement** dans la page dès qu'on renseigne son identifiant (voir plus bas). |
 | 🎯 **Entraînement** | Cartes-mémoire (flashcards) recto/verso et quiz à choix multiples pour s'auto-évaluer. |
 
 Autres atouts :
@@ -55,6 +56,7 @@ apprentissage-japonais/
     ├── kanji.js        # 127 kanji fréquents (lectures + exemple)
     ├── adjectifs.js    # 36 paires d'adjectifs opposés, par thème
     ├── couleurs.js     # 32 couleurs avec pastille et exemple
+    ├── videos.js       # Vidéos par thème (recherche ou intégration)
     ├── data.js         # Grammaire (plan Niveau 1 & 2) et groupes de verbes
     └── app.js          # Logique (navigation, flashcards, quiz, recherche, audio)
 ```
@@ -71,6 +73,23 @@ Pour **ajouter un verbe**, il suffit d'ajouter une ligne compacte au tableau `BA
 
 Pour ajouter un mot ou une leçon, complétez le tableau correspondant en respectant le
 format existant (chaque entrée fournit japonais, rōmaji et français).
+
+### Intégrer une vidéo précise
+
+Les vidéos sont définies dans `js/videos.js`. Par défaut, chaque thème renvoie vers une
+**recherche YouTube** (toujours valide). Pour **intégrer une vidéo précise** directement
+dans la page :
+
+1. Ouvrez la vidéo sur YouTube et copiez l'identifiant après `v=` dans l'URL
+   (ex. `https://www.youtube.com/watch?v=ABC123xyz` → `ABC123xyz`).
+2. Collez-le dans le champ `videoId` du thème voulu dans `js/videos.js`.
+
+La carte affiche alors un lecteur intégré (via `youtube-nocookie.com`) au lieu du bouton
+de recherche.
+
+> Remarque : l'intégration de vidéos nécessite que la page soit servie normalement
+> (serveur local ou hébergement). Dans l'aperçu « artifact » de Claude, les vidéos
+> s'ouvrent sur YouTube via le lien de recherche (contenu externe).
 
 ## 📝 Note pédagogique
 
