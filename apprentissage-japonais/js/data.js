@@ -489,4 +489,5 @@ window.DATA = {
   KANJI: (typeof KANJI !== "undefined" ? KANJI : window.KANJI),
   ADJECTIFS: (typeof ADJECTIFS !== "undefined" ? ADJECTIFS : window.ADJECTIFS),
   COULEURS: (typeof COULEURS !== "undefined" ? COULEURS : window.COULEURS),
+  KANA: (typeof KANA !== "undefined" ? KANA : window.KANA),
 };

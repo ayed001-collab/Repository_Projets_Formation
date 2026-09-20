@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  const { VOCABULAIRE, VERBES, GROUPES_VERBES, GRAMMAIRE, QUESTIONS, KANJI, ADJECTIFS, COULEURS } = window.DATA;
+  const { VOCABULAIRE, VERBES, GROUPES_VERBES, GRAMMAIRE, QUESTIONS, KANJI, ADJECTIFS, COULEURS, KANA } = window.DATA;
 
   /* ---------- Utilitaires ---------- */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -397,6 +397,62 @@
   }
 
   /* ================================================================
+   * KANA — tables hiragana / katakana
+   * ================================================================ */
+  function initKana() {
+    const container = $("#kana-list");
+    if (!container || !KANA) return;
+    let script = "h"; // "h" hiragana, "k" katakana
+
+    const renderTable = (t) => {
+      const grid = el("div", "kana-table");
+      grid.style.gridTemplateColumns = `repeat(${t.cols}, 1fr)`;
+      t.rows.forEach((row) => {
+        row.forEach((cell) => {
+          if (!cell) {
+            grid.appendChild(el("div", "kana-cell empty"));
+            return;
+          }
+          const ch = script === "h" ? cell.h : cell.k;
+          const c = el("button", "kana-cell");
+          c.setAttribute("data-speak", ch);
+          c.innerHTML = `<span class="kana-char">${escapeHtml(ch)}</span><span class="kana-romaji">${escapeHtml(cell.r)}</span>`;
+          grid.appendChild(c);
+        });
+      });
+      const sec = el("section", "kana-block");
+      const head = el("div", "level-head");
+      head.innerHTML = `<h3>${escapeHtml(t.titre)}</h3>`;
+      sec.appendChild(head);
+      sec.appendChild(grid);
+      return sec;
+    };
+
+    const render = () => {
+      container.innerHTML = "";
+      [KANA.gojuon, KANA.dakuten, KANA.yoon].forEach((t) => container.appendChild(renderTable(t)));
+    };
+
+    const hira = $("#kana-hira");
+    const kata = $("#kana-kata");
+    if (hira && kata) {
+      hira.addEventListener("click", () => {
+        script = "h";
+        hira.classList.add("active");
+        kata.classList.remove("active");
+        render();
+      });
+      kata.addEventListener("click", () => {
+        script = "k";
+        kata.classList.add("active");
+        hira.classList.remove("active");
+        render();
+      });
+    }
+    render();
+  }
+
+  /* ================================================================
    * COULEURS — pastilles colorées avec exemple
    * ================================================================ */
   function initCouleurs() {
@@ -643,6 +699,7 @@
     initNav();
     initTheme();
     initVocabulaire();
+    initKana();
     initVerbes();
     initGrammaire();
     initQuestions();
