@@ -210,7 +210,23 @@ main {
 .card .speak:hover { background: var(--accent-soft); color: var(--accent); }
 
 /* ---------- Verbes ---------- */
-.verb-filters { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+.search-input {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto 14px;
+  padding: 11px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+.search-input:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+.verb-count { text-align: center; color: var(--text-soft); font-size: 0.85rem; margin-bottom: 14px; }
+.empty-msg { text-align: center; color: var(--text-soft); padding: 30px 0; }
+.verb-filters { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
 .verb-card {
   background: var(--surface);
   border: 1px solid var(--border);

@@ -113,10 +113,24 @@
   function initVerbes() {
     const filters = $("#verb-filters");
     const list = $("#verb-list");
+    const search = $("#verb-search");
+    const count = $("#verb-count");
+    let currentGroup = "all";
 
     const render = (groupe) => {
+      currentGroup = groupe;
       list.innerHTML = "";
-      const verbs = groupe === "all" ? VERBES : VERBES.filter((v) => v.groupe === groupe);
+      const q = (search && search.value ? search.value : "").trim().toLowerCase();
+      let verbs = groupe === "all" ? VERBES : VERBES.filter((v) => v.groupe === groupe);
+      if (q) {
+        verbs = verbs.filter(
+          (v) =>
+            v.fr.toLowerCase().includes(q) ||
+            v.dictionnaire.romaji.toLowerCase().includes(q) ||
+            v.dictionnaire.jp.includes(q)
+        );
+      }
+      if (count) count.textContent = `${verbs.length} verbe${verbs.length > 1 ? "s" : ""}`;
       verbs.forEach((v) => {
         const g = GROUPES_VERBES[v.groupe];
         const card = el("div", "verb-card");
@@ -129,6 +143,14 @@
               ${speakBtn(form.jp)}
             </td>
           </tr>`;
+        const exemple = v.exemple
+          ? `<div class="verb-example">
+               <div class="jp">${escapeHtml(v.exemple.jp)}</div>
+               <div class="romaji">${escapeHtml(v.exemple.romaji)}</div>
+               <div class="fr">${escapeHtml(v.exemple.fr)}</div>
+               ${speakBtn(v.exemple.jp)}
+             </div>`
+          : "";
         card.innerHTML = `
           <div class="verb-head">
             <span class="img">${v.img}</span>
@@ -142,15 +164,13 @@
             ${row("Passé (~ました)", v.passe)}
             ${row("Forme en て", v.te)}
           </table>
-          <div class="verb-example">
-            <div class="jp">${escapeHtml(v.exemple.jp)}</div>
-            <div class="romaji">${escapeHtml(v.exemple.romaji)}</div>
-            <div class="fr">${escapeHtml(v.exemple.fr)}</div>
-            ${speakBtn(v.exemple.jp)}
-          </div>
+          ${exemple}
         `;
         list.appendChild(card);
       });
+      if (!verbs.length) {
+        list.appendChild(el("p", "empty-msg", "Aucun verbe ne correspond à la recherche."));
+      }
     };
 
     const makeFilter = (key, label, active) => {
@@ -167,6 +187,8 @@
     Object.entries(GROUPES_VERBES).forEach(([key, g]) =>
       filters.appendChild(makeFilter(key, g.nom))
     );
+
+    if (search) search.addEventListener("input", () => render(currentGroup));
 
     render("all");
   }
