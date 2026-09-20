@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  const { VOCABULAIRE, VERBES, GROUPES_VERBES, GRAMMAIRE, QUESTIONS, KANJI, ADJECTIFS } = window.DATA;
+  const { VOCABULAIRE, VERBES, GROUPES_VERBES, GRAMMAIRE, QUESTIONS, KANJI, ADJECTIFS, COULEURS } = window.DATA;
 
   /* ---------- Utilitaires ---------- */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -397,6 +397,50 @@
   }
 
   /* ================================================================
+   * COULEURS — pastilles colorées avec exemple
+   * ================================================================ */
+  function initCouleurs() {
+    const container = $("#couleurs-list");
+    if (!container || !COULEURS) return;
+
+    const swatchStyle = (hex) => {
+      if (hex === "rainbow")
+        return "background:conic-gradient(#e53935,#fb8c00,#fdd835,#43a047,#1e88e5,#8e24aa,#e53935);";
+      if (hex === "transparent")
+        return "background:repeating-conic-gradient(#cfcfcf 0% 25%, #ffffff 0% 50%) 50% / 14px 14px;";
+      return "background:" + hex + ";";
+    };
+
+    COULEURS.forEach((cat) => {
+      const sec = el("section", "couleur-group");
+      const head = el("div", "level-head");
+      head.innerHTML = `<h3>${cat.icon} ${escapeHtml(cat.categorie)}</h3><p>${escapeHtml(cat.desc)} · ${cat.items.length} couleurs</p>`;
+      sec.appendChild(head);
+      const grid = el("div", "couleur-grid");
+      cat.items.forEach((c) => {
+        const card = el("div", "couleur-card");
+        card.innerHTML = `
+          <div class="swatch" style="${swatchStyle(c.hex)}"></div>
+          <div class="couleur-body">
+            <div class="jp">${escapeHtml(c.jp)} ${speakBtn(c.jp)}</div>
+            <div class="kana">${escapeHtml(c.kana)}</div>
+            <div class="romaji">${escapeHtml(c.romaji)}</div>
+            <div class="fr">${escapeHtml(c.fr)}</div>
+            <div class="couleur-ex">
+              <span class="jp">${escapeHtml(c.exemple.jp)}</span>
+              <span class="romaji">${escapeHtml(c.exemple.romaji)}</span>
+              <span class="fr">${escapeHtml(c.exemple.fr)}</span>
+              ${speakBtn(c.exemple.jp)}
+            </div>
+          </div>`;
+        grid.appendChild(card);
+      });
+      sec.appendChild(grid);
+      container.appendChild(sec);
+    });
+  }
+
+  /* ================================================================
    * ENTRAÎNEMENT — jeu de données commun
    * ================================================================ */
   // On rassemble tout le vocabulaire pour les exercices.
@@ -604,6 +648,7 @@
     initQuestions();
     initKanji();
     initAdjectifs();
+    initCouleurs();
     initPractice();
     initSpeechDelegation();
   });

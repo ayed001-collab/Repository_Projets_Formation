@@ -488,4 +488,5 @@ window.DATA = {
   QUESTIONS: (typeof QUESTIONS !== "undefined" ? QUESTIONS : window.QUESTIONS),
   KANJI: (typeof KANJI !== "undefined" ? KANJI : window.KANJI),
   ADJECTIFS: (typeof ADJECTIFS !== "undefined" ? ADJECTIFS : window.ADJECTIFS),
+  COULEURS: (typeof COULEURS !== "undefined" ? COULEURS : window.COULEURS),
 };
