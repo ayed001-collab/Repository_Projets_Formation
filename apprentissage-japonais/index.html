@@ -20,6 +20,7 @@
     <button data-target="sec-verbes" type="button">🔀 Verbes</button>
     <button data-target="sec-grammaire" type="button">📚 Grammaire</button>
     <button data-target="sec-kanji" type="button">漢 Kanji</button>
+    <button data-target="sec-adjectifs" type="button">⇄ Adjectifs</button>
     <button data-target="sec-questions" type="button">❓ Questions</button>
     <button data-target="sec-entrainement" type="button">🎯 Entraînement</button>
   </nav>
@@ -65,6 +66,15 @@
       <input type="text" id="kanji-search" class="search-input" placeholder="🔍 Rechercher un kanji (sens, lecture ou caractère)…" />
       <div id="kanji-count" class="verb-count"></div>
       <div id="kanji-list"></div>
+    </section>
+
+    <!-- ADJECTIFS -->
+    <section id="sec-adjectifs" class="section">
+      <div class="section-intro">
+        <h2>⇄ Adjectifs & contraires</h2>
+        <p>Chaque adjectif est présenté avec son <strong>contraire</strong> en face, groupé par thème. Le badge <strong>い</strong> / <strong>な</strong> indique le type d'adjectif.</p>
+      </div>
+      <div id="adjectifs-list"></div>
     </section>
 
     <!-- QUESTIONS -->
@@ -119,6 +129,7 @@
   <script src="js/verbs.js"></script>
   <script src="js/questions.js"></script>
   <script src="js/kanji.js"></script>
+  <script src="js/adjectifs.js"></script>
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
 </body>

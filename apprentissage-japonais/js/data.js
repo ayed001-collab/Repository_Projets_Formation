@@ -487,4 +487,5 @@ window.DATA = {
   GRAMMAIRE,
   QUESTIONS: (typeof QUESTIONS !== "undefined" ? QUESTIONS : window.QUESTIONS),
   KANJI: (typeof KANJI !== "undefined" ? KANJI : window.KANJI),
+  ADJECTIFS: (typeof ADJECTIFS !== "undefined" ? ADJECTIFS : window.ADJECTIFS),
 };

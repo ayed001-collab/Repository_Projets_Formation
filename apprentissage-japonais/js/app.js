@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  const { VOCABULAIRE, VERBES, GROUPES_VERBES, GRAMMAIRE, QUESTIONS, KANJI } = window.DATA;
+  const { VOCABULAIRE, VERBES, GROUPES_VERBES, GRAMMAIRE, QUESTIONS, KANJI, ADJECTIFS } = window.DATA;
 
   /* ---------- Utilitaires ---------- */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -354,6 +354,49 @@
   }
 
   /* ================================================================
+   * ADJECTIFS — paires d'opposés, groupées par thème
+   * ================================================================ */
+  function initAdjectifs() {
+    const container = $("#adjectifs-list");
+    if (!container || !ADJECTIFS) return;
+
+    const cote = (x) => `
+      <div class="adj-side">
+        <div class="jp">${escapeHtml(x.jp)} <span class="adj-type type-${x.type === "な" ? "na" : x.type === "い" ? "i" : "autre"}">${escapeHtml(x.type)}</span></div>
+        <div class="kana">${escapeHtml(x.kana)}</div>
+        <div class="romaji">${escapeHtml(x.romaji)}</div>
+        <div class="fr">${escapeHtml(x.fr)}</div>
+        ${speakBtn(x.jp)}
+      </div>`;
+
+    ADJECTIFS.forEach((t) => {
+      const sec = el("section", "adj-group");
+      const head = el("div", "level-head");
+      head.innerHTML = `<h3>${t.icon} ${escapeHtml(t.theme)}</h3><p>${escapeHtml(t.desc)} · ${t.paires.length} paires</p>`;
+      sec.appendChild(head);
+      const grid = el("div", "adj-grid");
+      t.paires.forEach((p) => {
+        const card = el("div", "adj-card");
+        card.innerHTML = `
+          <div class="adj-pair">
+            ${cote(p.a)}
+            <div class="adj-vs">⇄</div>
+            ${cote(p.b)}
+          </div>
+          <div class="adj-ex">
+            <div class="jp">${escapeHtml(p.exemple.jp)}</div>
+            <div class="romaji">${escapeHtml(p.exemple.romaji)}</div>
+            <div class="fr">${escapeHtml(p.exemple.fr)}</div>
+            ${speakBtn(p.exemple.jp)}
+          </div>`;
+        grid.appendChild(card);
+      });
+      sec.appendChild(grid);
+      container.appendChild(sec);
+    });
+  }
+
+  /* ================================================================
    * ENTRAÎNEMENT — jeu de données commun
    * ================================================================ */
   // On rassemble tout le vocabulaire pour les exercices.
@@ -560,6 +603,7 @@
     initGrammaire();
     initQuestions();
     initKanji();
+    initAdjectifs();
     initPractice();
     initSpeechDelegation();
   });
