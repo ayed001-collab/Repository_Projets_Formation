@@ -486,4 +486,5 @@ window.DATA = {
   GROUPES_VERBES,
   GRAMMAIRE,
   QUESTIONS: (typeof QUESTIONS !== "undefined" ? QUESTIONS : window.QUESTIONS),
+  KANJI: (typeof KANJI !== "undefined" ? KANJI : window.KANJI),
 };

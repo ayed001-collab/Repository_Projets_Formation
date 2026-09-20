@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  const { VOCABULAIRE, VERBES, GROUPES_VERBES, GRAMMAIRE, QUESTIONS } = window.DATA;
+  const { VOCABULAIRE, VERBES, GROUPES_VERBES, GRAMMAIRE, QUESTIONS, KANJI } = window.DATA;
 
   /* ---------- Utilitaires ---------- */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -294,6 +294,66 @@
   }
 
   /* ================================================================
+   * KANJI — les kanji les plus fréquents (avec exemple)
+   * ================================================================ */
+  function initKanji() {
+    const container = $("#kanji-list");
+    if (!container || !KANJI) return;
+    const search = $("#kanji-search");
+    const count = $("#kanji-count");
+    const totalKanji = KANJI.reduce((n, c) => n + c.items.length, 0);
+
+    const carte = (k) => {
+      const card = el("div", "kanji-card");
+      card.innerHTML = `
+        <div class="kanji-char">${escapeHtml(k.char)} ${speakBtn(k.char)}</div>
+        <div class="kanji-read"><span class="lbl">音</span> ${escapeHtml(k.on)}</div>
+        <div class="kanji-read"><span class="lbl">訓</span> ${escapeHtml(k.kun)}</div>
+        <div class="kanji-fr">${escapeHtml(k.fr)}</div>
+        <div class="kanji-ex">
+          <div class="jp">${escapeHtml(k.exemple.jp)}</div>
+          <div class="romaji">${escapeHtml(k.exemple.romaji)}</div>
+          <div class="fr">${escapeHtml(k.exemple.fr)}</div>
+          ${speakBtn(k.exemple.jp)}
+        </div>`;
+      return card;
+    };
+
+    const render = () => {
+      container.innerHTML = "";
+      const q = (search && search.value ? search.value : "").trim().toLowerCase();
+      let shown = 0;
+      KANJI.forEach((cat) => {
+        const items = q
+          ? cat.items.filter(
+              (k) =>
+                k.char.includes(q) ||
+                k.fr.toLowerCase().includes(q) ||
+                k.on.toLowerCase().includes(q) ||
+                k.kun.toLowerCase().includes(q) ||
+                k.exemple.romaji.toLowerCase().includes(q)
+            )
+          : cat.items;
+        if (!items.length) return;
+        shown += items.length;
+        const sec = el("section", "k-group");
+        const head = el("div", "level-head");
+        head.innerHTML = `<h3>${cat.icon} ${escapeHtml(cat.categorie)}</h3><p>${escapeHtml(cat.desc)} · ${items.length} kanji</p>`;
+        sec.appendChild(head);
+        const grid = el("div", "kanji-grid");
+        items.forEach((k) => grid.appendChild(carte(k)));
+        sec.appendChild(grid);
+        container.appendChild(sec);
+      });
+      if (count) count.textContent = `${shown} kanji sur ${totalKanji}`;
+      if (!shown) container.appendChild(el("p", "empty-msg", "Aucun kanji ne correspond à la recherche."));
+    };
+
+    if (search) search.addEventListener("input", render);
+    render();
+  }
+
+  /* ================================================================
    * ENTRAÎNEMENT — jeu de données commun
    * ================================================================ */
   // On rassemble tout le vocabulaire pour les exercices.
@@ -499,6 +559,7 @@
     initVerbes();
     initGrammaire();
     initQuestions();
+    initKanji();
     initPractice();
     initSpeechDelegation();
   });

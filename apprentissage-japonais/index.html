@@ -19,6 +19,7 @@
     <button class="active" data-target="sec-vocab" type="button">🈯 Vocabulaire</button>
     <button data-target="sec-verbes" type="button">🔀 Verbes</button>
     <button data-target="sec-grammaire" type="button">📚 Grammaire</button>
+    <button data-target="sec-kanji" type="button">漢 Kanji</button>
     <button data-target="sec-questions" type="button">❓ Questions</button>
     <button data-target="sec-entrainement" type="button">🎯 Entraînement</button>
   </nav>
@@ -53,6 +54,17 @@
         <p>Plan d'apprentissage débutant en 32 leçons (Niveau 1 & 2). Cliquez sur une leçon pour la déplier.</p>
       </div>
       <div id="grammar-list"></div>
+    </section>
+
+    <!-- KANJI -->
+    <section id="sec-kanji" class="section">
+      <div class="section-intro">
+        <h2>漢字 Kanji</h2>
+        <p>Les kanji les plus récurrents, par thèmes. Chaque kanji montre ses lectures <strong>on'yomi</strong> (音, sino-japonaise) et <strong>kun'yomi</strong> (訓, japonaise), son sens, et un exemple d'utilisation.</p>
+      </div>
+      <input type="text" id="kanji-search" class="search-input" placeholder="🔍 Rechercher un kanji (sens, lecture ou caractère)…" />
+      <div id="kanji-count" class="verb-count"></div>
+      <div id="kanji-list"></div>
     </section>
 
     <!-- QUESTIONS -->
@@ -106,6 +118,7 @@
   <script src="js/vocab.js"></script>
   <script src="js/verbs.js"></script>
   <script src="js/questions.js"></script>
+  <script src="js/kanji.js"></script>
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
 </body>
