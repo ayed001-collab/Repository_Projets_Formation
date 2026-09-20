@@ -176,7 +176,14 @@
    * ================================================================ */
   function initGrammaire() {
     const container = $("#grammar-list");
-    GRAMMAIRE.forEach((lecon) => {
+
+    // Titres des niveaux du plan d'apprentissage débutant.
+    const NIVEAUX = {
+      1: { titre: "Niveau 1 — Les fondations", sous: "Comprendre et former ses premières phrases." },
+      2: { titre: "Niveau 2 — Construire des phrases", sous: "Conjuguer, relier les idées et nuancer." },
+    };
+
+    const renderLecon = (lecon, numero) => {
       const details = el("details", "lesson");
       const exemples = lecon.exemples
         .map(
@@ -192,6 +199,7 @@
       const paragraphes = lecon.contenu.map((p) => `<p>${escapeHtml(p)}</p>`).join("");
       details.innerHTML = `
         <summary>
+          <span class="lesson-num">${numero}</span>
           <span class="icon">${lecon.icon}</span>
           <span>${escapeHtml(lecon.titre)}
             <span class="resume">${escapeHtml(lecon.resume)}</span>
@@ -203,7 +211,21 @@
           ${exemples}
         </div>
       `;
-      container.appendChild(details);
+      return details;
+    };
+
+    // Regroupe les leçons par niveau (défaut : niveau 1), en gardant l'ordre.
+    Object.keys(NIVEAUX).forEach((niv) => {
+      const lecons = GRAMMAIRE.filter((l) => String(l.niveau || 1) === niv);
+      if (!lecons.length) return;
+      const groupe = el("section", "level-group");
+      groupe.innerHTML = `
+        <div class="level-head">
+          <h3>${escapeHtml(NIVEAUX[niv].titre)}</h3>
+          <p>${escapeHtml(NIVEAUX[niv].sous)} · ${lecons.length} leçons</p>
+        </div>`;
+      lecons.forEach((lecon, i) => groupe.appendChild(renderLecon(lecon, i + 1)));
+      container.appendChild(groupe);
     });
   }
 

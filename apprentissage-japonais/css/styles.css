@@ -248,6 +248,30 @@ main {
 .verb-example .fr { color: var(--text-soft); font-size: 0.9rem; }
 
 /* ---------- Grammaire ---------- */
+.level-group { margin-bottom: 26px; }
+.level-head {
+  margin: 8px 0 14px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, var(--accent-soft), var(--surface-2));
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+}
+.level-head h3 { margin: 0; font-size: 1.15rem; color: var(--accent); }
+.level-head p { margin: 4px 0 0; color: var(--text-soft); font-size: 0.88rem; }
+.lesson-num {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
 .lesson {
   background: var(--surface);
   border: 1px solid var(--border);

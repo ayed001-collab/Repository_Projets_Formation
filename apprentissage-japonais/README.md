@@ -11,7 +11,7 @@ pour un apprentissage plus visuel.
 | --- | --- |
 | 🈯 **Vocabulaire** | **1050 mots** (50 par thème) classés en 21 thèmes d'apprentissage (salutations & politesse, nombres, temps & jours, famille, corps, couleurs, alimentation, restauration, achats & argent, transport, voyages, en ville & lieux, maison, vêtements, école & études, métiers & travail, animaux, nature & météo, directions & positions, adjectifs courants, expressions utiles). Chaque mot : image + kanji/kana + kana de lecture + rōmaji + français. |
 | 🔀 **Verbes** | Conjugaison des verbes essentiels à la forme polie (dictionnaire, présent ~ます, négatif ~ません, passé ~ました, forme en て), classés par groupe (godan, ichidan, irréguliers), avec une phrase d'exemple. |
-| 📚 **Grammaire** | Leçons courtes et progressives : ordre des mots (SOV), particules は・を・に・で・の, la copule です, les questions avec か, les adjectifs -い / -な. |
+| 📚 **Grammaire** | **Plan d'apprentissage débutant en 32 leçons**, réparties en Niveau 1 (les fondations : SOV, です, は・が・を・の・に・で・と・も, これ/それ/あれ, あります/います, adjectifs, pronoms, classificateurs) et Niveau 2 (construire des phrases : formes ます・ました・ません, forme て, ~てください, ~ています, ~たい, invitations, cause から/ので, opposition, comparaison, ~ことができる, なる, expressions temporelles). |
 | 🎯 **Entraînement** | Cartes-mémoire (flashcards) recto/verso et quiz à choix multiples pour s'auto-évaluer. |
 
 Autres atouts :
