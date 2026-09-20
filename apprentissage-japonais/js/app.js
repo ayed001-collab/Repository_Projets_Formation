@@ -312,7 +312,16 @@
 
     const q = questions[i];
     // On demande la traduction française d'un mot affiché en japonais.
-    const wrong = shuffle(POOL.filter((m) => m.fr !== q.fr)).slice(0, 3);
+    // On choisit 3 distracteurs dont la traduction est distincte entre elles
+    // et différente de la bonne réponse (évite les options en double).
+    const wrong = [];
+    const vues = new Set([q.fr]);
+    for (const m of shuffle(POOL)) {
+      if (vues.has(m.fr)) continue;
+      vues.add(m.fr);
+      wrong.push(m);
+      if (wrong.length === 3) break;
+    }
     const options = shuffle([q, ...wrong]);
 
     box.innerHTML = `

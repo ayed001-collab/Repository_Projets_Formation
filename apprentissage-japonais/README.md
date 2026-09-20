@@ -9,7 +9,7 @@ pour un apprentissage plus visuel.
 
 | Module | Contenu |
 | --- | --- |
-| 🈯 **Vocabulaire** | Plus de 200 mots classés en 21 thèmes d'apprentissage (salutations, nombres, temps & jours, famille, corps, couleurs, alimentation, restauration, achats & argent, transport, voyages, en ville & lieux, maison, vêtements, école & études, métiers & travail, animaux, nature & météo, directions & positions, adjectifs courants, expressions utiles). Chaque mot : image + kanji/kana + kana de lecture + rōmaji + français. |
+| 🈯 **Vocabulaire** | **1050 mots** (50 par thème) classés en 21 thèmes d'apprentissage (salutations & politesse, nombres, temps & jours, famille, corps, couleurs, alimentation, restauration, achats & argent, transport, voyages, en ville & lieux, maison, vêtements, école & études, métiers & travail, animaux, nature & météo, directions & positions, adjectifs courants, expressions utiles). Chaque mot : image + kanji/kana + kana de lecture + rōmaji + français. |
 | 🔀 **Verbes** | Conjugaison des verbes essentiels à la forme polie (dictionnaire, présent ~ます, négatif ~ません, passé ~ました, forme en て), classés par groupe (godan, ichidan, irréguliers), avec une phrase d'exemple. |
 | 📚 **Grammaire** | Leçons courtes et progressives : ordre des mots (SOV), particules は・を・に・で・の, la copule です, les questions avec か, les adjectifs -い / -な. |
 | 🎯 **Entraînement** | Cartes-mémoire (flashcards) recto/verso et quiz à choix multiples pour s'auto-évaluer. |
@@ -43,15 +43,17 @@ apprentissage-japonais/
 ├── css/
 │   └── styles.css      # Design (responsive, thème clair/sombre)
 └── js/
-    ├── data.js         # Contenu pédagogique (vocabulaire, verbes, grammaire)
+    ├── vocab.js        # Vocabulaire : 21 thèmes × 50 mots
+    ├── data.js         # Verbes et grammaire
     └── app.js          # Logique (navigation, flashcards, quiz, audio)
 ```
 
 ## ➕ Enrichir le contenu
 
-Tout le contenu est centralisé dans `js/data.js`. Pour ajouter un mot, un verbe ou une
-leçon, il suffit de compléter les tableaux `VOCABULAIRE`, `VERBES` ou `GRAMMAIRE` en
-respectant le format existant (chaque entrée fournit japonais, rōmaji et français).
+Le vocabulaire est centralisé dans `js/vocab.js` (tableau `VOCABULAIRE`) ; les verbes et
+la grammaire dans `js/data.js` (`VERBES`, `GRAMMAIRE`). Pour ajouter un mot, un verbe ou
+une leçon, il suffit de compléter le tableau correspondant en respectant le format
+existant (chaque entrée fournit japonais, rōmaji et français).
 
 ## 📝 Note pédagogique
 
